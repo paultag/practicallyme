@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head_imports %}
+        <link
+            rel="stylesheet"
+            href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"
+        ></link>
+{% endblock %}
+
+{% block content %}
+    <div class="hero-unit">
+        <h1>404</h1>
+        {{ request_path }} not found, dude.
+    </div>
+{% endblock %}

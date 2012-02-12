@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block style %}
+@import url(http://fonts.googleapis.com/css?family={{ page.font }});
+
+body {
+    background-image:  url({{ page.background }});
+    background-size:   cover;
+    background-repeat: no-repeat;
+    font-family: '{{ page.font }}', sans-serif;
+}
+h1 {
+    font-size:        3em;
+}
+h1, h2, h3, h4 {
+    margin:           0px;
+}
+.infopane {
+    position:         fixed;
+    top:              0px;
+    left:             0px;
+    height:           100%;
+    width:            35%;
+    background-image: url({{ STATIC_URL }}images/bg-xp-b.png);
+    border-right:     1px solid #000;
+}
+.content {
+    padding:          15px;
+    opacity:          1;
+    color:            #FFFFFF;
+}
+.top-bump {
+    margin-top:       40px;
+}
+{% endblock %}
+
+{% block content %}
+    <div class = "infopane" >
+        <div class = 'content' >
+            <h1>{{ user.get_full_name }}</h1>
+            <h2>{{ page.title }}</h2>
+            <div class = 'top-bump' >{{ page.blurb }}</div>
+        </div>
+    </div>
+{% endblock %}

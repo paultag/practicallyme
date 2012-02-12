@@ -1,0 +1,16 @@
+{% extends "bootstrap_base.html" %}
+
+{% block content %}
+<div class="hero-unit">
+    <h1>Welcome Back!</h1>
+    <p>Feelin' the love? Log back in, my friend. Groove on the love. Feel free
+    to bump those login creds down below.</p>
+    <form action = "{% url me_login_gate %}" method = "POST" >
+        <input name = "uname"  type="text"     placeholder="Username" />
+        <input name = "passw"  type="password" placeholder="Password" />
+        <input name = "submit" type = "submit"
+            class = "btn primary" value = "Log In" />
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
