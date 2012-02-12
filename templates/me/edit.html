@@ -3,30 +3,33 @@
 
 {% block content %}
 <h1>{{ user.get_full_name }}</h1>
-<table action = '{% url me_edit_update %}' method = 'POST' >
-{% for key in field_order %}
-    <tr>
-        <td>{{ fields|key:key|key:"txt" }}</td>
-        <td><input
-            type        = 'text'
-            value       = '{{ fields|key:key|key:"val" }}'
-            placeholder = '{{ fields|key:key|key:"txt" }}'
-            name        = '{{ key }}'
-        /></td>
-    </tr>
-{% endfor %}
-    <tr>
-        <td>Blurb</td>
-        <td>
-            <textarea class='span12' rows='10' name='blurb'
-            >{{ page.blurb }}</textarea>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <input class = 'btn primary' type = 'submit' value = 'Update' />
-        </td>
-    </tr>
-</table>
+<form action = '{% url me_edit_update %}' method = 'POST' >
+    <table>
+        {% for key in field_order %}
+        <tr>
+            <td>{{ fields|key:key|key:"txt" }}</td>
+            <td><input
+                type        = 'text'
+                value       = '{{ fields|key:key|key:"val" }}'
+                placeholder = '{{ fields|key:key|key:"txt" }}'
+                name        = '{{ key }}'
+                /></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Blurb</td>
+            <td>
+                <textarea class='span12' rows='10' name='blurb'
+                    >{{ page.blurb }}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input class = 'btn primary' type = 'submit' value = 'Update' />
+            </td>
+        </tr>
+    </table>
+    {% csrf_token %}
+</form>
 {% endblock %}

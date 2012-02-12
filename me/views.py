@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
 
 from practicallyme.me.models import Page
 from practicallyme.me import config
@@ -46,8 +47,11 @@ def me_logout(request):
     request.session.clear()
     return redirect( "index" )
 
+@require_POST
 def me_edit_update(request):
-    pass
+    if not isLoggedIn(request):
+        return redirect( "me_login" )
+
 
 def me_edit(request):
     if not isLoggedIn(request):
