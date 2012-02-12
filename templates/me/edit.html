@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>{{ user.get_full_name }}</h1>
-<table>
+<table action = '{% url me_edit_update %}' method = 'POST' >
 {% for key, val in fields.items %}
     <tr>
         <td>{{ val.txt }}</td>

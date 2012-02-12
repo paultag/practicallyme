@@ -45,6 +45,9 @@ def me_logout(request):
     request.session.clear()
     return redirect( "index" )
 
+def me_edit_update(request):
+    pass
+
 def me_edit(request):
     if not isLoggedIn(request):
         return redirect( "me_login" )
