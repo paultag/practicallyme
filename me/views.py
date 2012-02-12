@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
 from practicallyme.me.models import Page
+from practicallyme.me import config
 
 def isLoggedIn(request):
     return request.session.get('cur_user', False)
@@ -54,44 +55,12 @@ def me_edit(request):
 
     user = User.objects.get(username=request.session['cur_user'])
     page = get_page( user )
-
-    fields = {
-        "priv_email" : {
-            "val" : user.email,
-            "txt" : "Private Email"
-        },
-        "first_name" : {
-            "val" : user.first_name,
-            "txt" : "First Name"
-        },
-        "last_name" : {
-            "val" : user.last_name,
-            "txt" : "Last Name"
-        },
-        "font" : {
-            "val" : page.font,
-            "txt" : "Font"
-        },
-        "title" : {
-            "val" : page.title,
-            "txt" : "Title"
-        },
-        "background" : {
-            "val" : page.background,
-            "txt" : "Background"
-        },
-        "website"   : {
-            "val" : page.website,
-            "txt" : "Website"
-        },
-        "pub_email" : {
-            "val" : page.email,
-            "txt" : "Public Email"
-        }
-    }
+    fields = config.get_field_dict( user, page )
+    order  = config.get_fields()
 
     return render( request, "me/edit.html", {
-        "user"   : user,
-        "page"   : page,
-        "fields" : fields
+        "user"        : user,
+        "page"        : page,
+        "field_order" : order,
+        "fields"      : fields
     })

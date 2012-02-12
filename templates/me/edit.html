@@ -1,14 +1,15 @@
 {% extends "bootstrap_base.html" %}
+{% load me_tags %}
 
 {% block content %}
 <h1>{{ user.get_full_name }}</h1>
 <table action = '{% url me_edit_update %}' method = 'POST' >
-{% for key, val in fields.items %}
+{% for key in field_order %}
     <tr>
         <td>{{ val.txt }}</td>
         <td><input
             type = 'text'
-            value = '{{ val.val }}'
+            value = '{{ fields|key:key|key:"txt" }}'
             placeholder = '{{ val.txt }}'
             name = '{{ key }}'
         /></td>
