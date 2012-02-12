@@ -6,12 +6,12 @@
 <table action = '{% url me_edit_update %}' method = 'POST' >
 {% for key in field_order %}
     <tr>
-        <td>{{ val.txt }}</td>
+        <td>{{ fields|key:key|key:"txt" }}</td>
         <td><input
-            type = 'text'
-            value = '{{ fields|key:key|key:"txt" }}'
-            placeholder = '{{ val.txt }}'
-            name = '{{ key }}'
+            type        = 'text'
+            value       = '{{ fields|key:key|key:"val" }}'
+            placeholder = '{{ fields|key:key|key:"txt" }}'
+            name        = '{{ key }}'
         /></td>
     </tr>
 {% endfor %}
