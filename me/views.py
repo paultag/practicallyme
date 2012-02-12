@@ -52,12 +52,33 @@ def me_edit_update(request):
     if not isLoggedIn(request):
         return redirect( "me_login" )
     # validate post
+    keys = config.get_fields()
+
+    for key in keys:
+        if not key in request.POST:
+            # set warning
+            return redirect( "me_edit" )
+
     user = User.objects.get(
         username=request.session['cur_user']
     )
     page = get_page(user)
-    # set attrs
-    # return redirect( "view_person", name=request.session['cur_user'] )
+    p = request.POST
+
+    user.email      = p['priv_email']
+    user.first_name = p['first_name']
+    user.last_name  = p['last_name']
+    page.font       = p['font']
+    page.title      = p['title']
+    page.background = p['background']
+    page.website    = p['website']
+    page.email      = p['pub_email']
+    page.blurb      = p['blurb']
+
+    page.save()
+    user.save()
+
+    return redirect( "view_person", name=request.session['cur_user'] )
 
 def me_edit(request):
     if not isLoggedIn(request):
