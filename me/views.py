@@ -51,7 +51,7 @@ def me_logout(request):
 def me_edit_update(request):
     if not isLoggedIn(request):
         return redirect( "me_login" )
-
+    return redirect( "view_person", name=request.session['cur_user'] )
 
 def me_edit(request):
     if not isLoggedIn(request):
