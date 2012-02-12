@@ -3,16 +3,29 @@
 {% block content %}
 <h1>{{ user.get_full_name }}</h1>
 <table>
-    {% for key, val in fields.items %}
-        <tr>
-            <td>{{ val.txt }}</td>
-            <td><input
-                type = 'text'
-                value = '{{ val.val }}'
-                placeholder = '{{ val.txt }}'
-                name = '{{ key }}'
-            /></td>
-        </tr>
-    {% endfor %}
+{% for key, val in fields.items %}
+    <tr>
+        <td>{{ val.txt }}</td>
+        <td><input
+            type = 'text'
+            value = '{{ val.val }}'
+            placeholder = '{{ val.txt }}'
+            name = '{{ key }}'
+        /></td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td>Blurb</td>
+        <td>
+            <textarea class='span12' rows='10' name='blurb'
+            >{{ page.blurb }}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input class = 'btn primary' type = 'submit' value = 'Update' />
+        </td>
+    </tr>
 </table>
 {% endblock %}
