@@ -1,8 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
+from practicallyme.me.models import Page
+
 def isLoggedIn(request):
     return request.session.get('cur_user', False)
+
+def get_page(user):
+    try:
+        page = Page.objects.get(owner=user)
+    except Page.DoesNotExist:
+        page = Page(
+            owner=user
+        )
+        page.save()
+    return page
 
 def me_login_gate(request):
     if isLoggedIn(request):
@@ -38,7 +50,17 @@ def me_edit(request):
         return redirect( "me_login" )
 
     user = User.objects.get(username=request.session['cur_user'])
+    page = get_page( user )
+
+    fields = {
+        "first_name" : {
+            "val" : user.first_name,
+            "txt" : "First Name"
+        }
+    }
 
     return render( request, "me/edit.html", {
-        "user" : user
+        "user"   : user,
+        "page"   : page,
+        "fields" : fields
     })
