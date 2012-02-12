@@ -17,7 +17,7 @@ def me_login_gate(request):
     try:
         user = User.objects.get(username=username)
         if user.check_password(password):
-            request.session['cur_user'] = user
+            request.session['cur_user'] = user.username
             return redirect( "me_edit" )
         else:
             return redirect( "me_login" )
@@ -37,7 +37,7 @@ def me_edit(request):
     if not isLoggedIn(request):
         return redirect( "me_login" )
 
-    user = request.session['cur_user']
+    user = User.objects.get(username=request.session['cur_user'])
 
     return render( request, "me/edit.html", {
         "user" : user
