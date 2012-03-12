@@ -3,6 +3,11 @@
 {% block style %}
 @import url(http://fonts.googleapis.com/css?family={{ page.font }});
 
+html, body {
+    height:            100%;
+    width:             100%;
+}
+
 body {
     background-image:  url({{ page.background }});
     background-size:   cover;
